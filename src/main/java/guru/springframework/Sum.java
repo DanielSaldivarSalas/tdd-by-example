@@ -18,8 +18,15 @@ public class Sum implements MoneyExpression{
     }
 
     @Override
+    public MoneyExpression times(int multiplier) {
+        //TODO determine if this is needed
+
+        return new Sum(this.augmend.times(multiplier) , this.addmend.times(multiplier));
+    }
+
+    @Override
     public MoneyExpression plus(MoneyExpression addend) {
         //TODO Determine if this is needed
-        return null;
+        return new Sum(this, addmend);
     }
 }
