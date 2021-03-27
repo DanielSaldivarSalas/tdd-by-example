@@ -38,11 +38,12 @@ public class Money implements MoneyExpression {
     }
 
 
-    public Money times(int multiplier){
+    public MoneyExpression times(int multiplier){
         return new Money(this.amount * multiplier, this.currency);
     }
 
-    public MoneyExpression plus(Money addend){
+    @Override
+    public MoneyExpression plus(MoneyExpression addend){
         return new Sum(this, addend);
     }
 

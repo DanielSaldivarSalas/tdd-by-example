@@ -1,17 +1,25 @@
 package guru.springframework;
 
-public class Sum implements MoneyExpression{
-    Money augmend;
-    Money addmend;
+import java.beans.Expression;
 
-    public Sum(Money augmend, Money addmend) {
+public class Sum implements MoneyExpression{
+    MoneyExpression augmend;
+    MoneyExpression addmend;
+
+    public Sum(MoneyExpression augmend, MoneyExpression addmend) {
         this.augmend = augmend;
         this.addmend = addmend;
     }
 
     @Override
     public Money reduce(Bank bank, String to) {
-        int amount = augmend.amount + addmend.amount;
+        int amount = augmend.reduce(bank, to).amount + addmend.reduce(bank,to).amount;
         return new Money(amount, to);
+    }
+
+    @Override
+    public MoneyExpression plus(MoneyExpression addend) {
+        //TODO Determine if this is needed
+        return null;
     }
 }
